@@ -3,6 +3,9 @@
 <ul>
   <li>Name: <%= link_to i.name, user_invention_path(i.user, i)%>
   <li>Description: <%= i.description%></li>
-  <li>Created by: <%= i.user.name%></li>
+  <!--<li>Created by: < #i.user.name%></li>-->
 </ul><br/>
+
 <%end%>
+<button id="more_invention_data">More Info</button>
+<div id= "ajax_invention_data"></div>

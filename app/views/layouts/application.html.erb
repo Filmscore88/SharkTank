@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-
-  </head>
-  <body>
-    <title>SharkkTankk</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>
+    <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
@@ -27,6 +24,9 @@
             <% end %>
         </ul>
 
+  </head>
+  <body>
+<body class="<%= params[:controller] %>">
 <%=yield%>
   </body>
 </html>
