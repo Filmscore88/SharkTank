@@ -1,16 +1,15 @@
 
 $(function() {
-    getInventions();
+    activateListener();
 });
 
 
 // JS model object to use for JSON data manipulation
 class Invention {
-  constructor(id, name, description, user_id) {
+  constructor(id, name, description) {
     this.id = id;
     this.name= name;
     this.description= description;
-    this.user_id= user_id;
   }
 }
 
@@ -19,12 +18,17 @@ class Invention {
 Invention.prototype.addHTML= function(){
   return(
     `<ul>
-      <li>Name: ${this.name}</li>
-      <li>Inventor: ${this.user.name}</li>
+      <li>Invention Name: ${this.name}</li>
+      <li>Description: ${this.description}</li>
     </ul>`
   )
 }
-
+function activateListener(){
+$('#more_invention_data').on('click', function(e) {
+   e.preventDefault();
+   getInventions();
+ });
+}
 function getInventions(){
   $.ajax({
     url: "http://localhost:3000/inventions",
@@ -32,6 +36,11 @@ function getInventions(){
     dataType: "json"
 
   }).done(function (data){
-    console.log(data)
-  })
+    data.forEach(function(obj){
+
+      var invention= new Invention(obj.id, obj.name, obj.description);
+      var html= invention.addHTML();
+      $('#ajax_invention_data').append(html)
+    });
+  });
 }
