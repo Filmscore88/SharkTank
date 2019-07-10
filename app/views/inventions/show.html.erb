@@ -3,3 +3,7 @@
 <h3>Description: <%= @invention.description %> </h3>
 
 <%= link_to 'create new', new_user_invention_path(@invention.user)%></br>
+</br>
+
+<button id="get_invenstments_data">See investments...</button>
+<div id= "ajax_investments_data"></div>
