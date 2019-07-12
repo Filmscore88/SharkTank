@@ -16,9 +16,10 @@ class Invention {
 
 // Method for model object prototype to append HTML to DOM
 Invention.prototype.addHTML= function(){
+  let userId = $('ol')[0].id;
   return(
     `<ul>
-      <li>Invention Name: ${this.name}</li>
+      <li>Invention Name:<a href= inventions/${this.id}"> ${this.name}</a> </li>
       <li>Description: ${this.description}</li>
     </ul>`
   )
@@ -39,7 +40,8 @@ function activateListeners(){
 // Listeners
 function moreInventionData(){
 $('#more_invention_data').on('click', function(e) {
-   history.pushState(null, null, "inventions")
+
+   history.replaceState(null, null, "/inventions");
    e.preventDefault();
    getInventions();
  });
