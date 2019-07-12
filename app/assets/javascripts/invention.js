@@ -1,6 +1,6 @@
 
 $(function() {
-    activateListener();
+    activateListeners();
 });
 
 
@@ -23,12 +23,37 @@ Invention.prototype.addHTML= function(){
     </ul>`
   )
 }
-function activateListener(){
+
+//Method for prototype to add relation data objects as HTML
+Invention.prototype.inventionsHTML= function(){
+
+
+}
+// Listener functions to be run on document ready
+function activateListeners(){
+  $('#html_format').html('')
+  showInvestments();
+  moreInventionData();
+}
+
+// Listeners
+function moreInventionData(){
 $('#more_invention_data').on('click', function(e) {
+   history.pushState(null, null, "inventions")
    e.preventDefault();
    getInventions();
  });
 }
+
+function showInvestments(){
+  $('#get_investments_data').on('click', function(e){
+    e.preventDefault();
+    getInvestments();
+  })
+
+}
+
+// ajax request funcitons
 function getInventions(){
   $.ajax({
     url: "http://localhost:3000/inventions",
@@ -43,4 +68,13 @@ function getInventions(){
       $('#ajax_invention_data').append(html)
     });
   });
+}
+
+
+
+function getInvestments(){
+  $.get(`/users/${id}/inventions/${id}.json`, function(json) {
+
+
+});
 }

@@ -1,4 +1,5 @@
 <h1> Inventions</h1>
+<div id= "html_format">
 <% @inventions.each do |i|%>
 <ul>
   <li>Invention Name: <%= link_to i.name, user_invention_path(i.user, i)%>
@@ -6,5 +7,6 @@
 </ul><br/>
 
 <%end%>
+</div>
 <button id="more_invention_data">More Info</button>
 <div id= "ajax_invention_data"></div>
