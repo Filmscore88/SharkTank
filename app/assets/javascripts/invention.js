@@ -49,14 +49,14 @@ $('#more_invention_data').on('click', function(e) {
 
   $(document).on('click', ".show_link", function(e){
     e.preventDefault();
-    $('#html_format').html('')
+    $('#ajax_invention_data').html('')
     let id= $(this).attr('data-id')
     fetch(`inventions/${id}.json`)
     .then(res => res.json())
     .then(invention => {
-      let newInvention= new Invention(invention)
+      let newInvention= new Invention(invention.id, invention.name, invention.description)
       let inventionHTML= newInvention.showHTML()
-      $('#html_format').append(inventionHTML)
+      $('#ajax_invention_data').append(inventionHTML)
     })
   })
 }
