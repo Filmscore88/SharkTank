@@ -1,12 +1,10 @@
 <h1>New Invention</h1>
-<%= form_for @invention do |f| %>
+<%= form_for @invention, html: {id: :newInv} do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %><br />
   <%= f.label :description %>
   <%= f.text_field :description %><br />
   <%= f.hidden_field :user_id %>
   <br />
-<div id= "new_inv">
-  <%= f.submit %>
-</div>
+ <%= f.submit %> </div>
 <% end %>

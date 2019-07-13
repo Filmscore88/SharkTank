@@ -75,9 +75,10 @@ $('#more_invention_data').on('click', function(e) {
 }
 
   function invSubmit(){
-    $("#new_inv").on("click", function(e){
+    $("#newInv").on("submit", function(e){
       e.preventDefault();
-      console.log("whalla!!!")
+      
+      console.log($(this).serialize())
     })
   }
 
