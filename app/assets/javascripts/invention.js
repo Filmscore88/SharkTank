@@ -81,8 +81,10 @@ $('#more_invention_data').on('click', function(e) {
       const values= $(this).serialize()
 
       $.post("/inventions", values).done(function(data){
-
-        console.log(data)
+        $("#app-container").html("");
+        const newInv= new Invention(data)
+        const html= newInv.showHTML()
+        $("#app-container").append(html)
       })
     })
   }
