@@ -77,8 +77,13 @@ $('#more_invention_data').on('click', function(e) {
   function invSubmit(){
     $("#newInv").on("submit", function(e){
       e.preventDefault();
-      
-      console.log($(this).serialize())
+
+      const values= $(this).serialize()
+
+      $.post("/inventions", values).done(function(data){
+
+        console.log(data)
+      })
     })
   }
 

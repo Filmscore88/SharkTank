@@ -20,10 +20,12 @@ class InventionsController < ApplicationController
   end
 
   def create
-    @user= User.find_by(id: params[:invention][:user_id])
+    @user= User.find_by(id: current_user.id)
     @invention= @user.inventions.build(invention_params)
       if @invention.save
-        redirect_to user_invention_path(@user, @invention)
+        render json: @invention
+
+
       else
         flash[:notice]= 'ERROR: Invalid Entry'
         render :new
