@@ -41,7 +41,7 @@ function activateListeners(){
 // Listeners
 function moreInventionData(){
 $('#more_invention_data').on('click', function(e) {
-
+  $('#button').html('')
    history.replaceState(null, null, "/inventions");
    e.preventDefault();
    getInventions();
