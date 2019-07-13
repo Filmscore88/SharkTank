@@ -6,10 +6,12 @@ $(function() {
 
 // JS model object to use for JSON data manipulation
 class Invention {
-  constructor(id, name, description) {
-    this.id = id;
-    this.name= name;
-    this.description= description;
+  constructor(obj) {
+    this.id = obj.id;
+    this.name= obj.name;
+    this.description= obj.description;
+
+    this.user_name= obj.user.name
   }
 }
 
@@ -27,7 +29,8 @@ Invention.prototype.addHTML= function(){
 //Method for prototype to add relation data objects as HTML
 Invention.prototype.showHTML= function(){
   return(
-  ` <h2>Name:${this.name}
+  ` <h2>Name:${this.name}</h2>
+    <h3>Inventor: ${this.user_name}</h3>
     <h3>Description: ${this.description}</h3>`
   )
 }
@@ -54,7 +57,7 @@ $('#more_invention_data').on('click', function(e) {
     fetch(`inventions/${id}.json`)
     .then(res => res.json())
     .then(invention => {
-      let newInvention= new Invention(invention.id, invention.name, invention.description)
+      let newInvention= new Invention(invention)
       let inventionHTML= newInvention.showHTML()
       $('#ajax_invention_data').append(inventionHTML)
     })
@@ -73,7 +76,7 @@ function getInventions(){
   }).done(function (data){
     data.forEach(function(obj){
 
-      var invention= new Invention(obj.id, obj.name, obj.description);
+      var invention= new Invention(obj);
       var html= invention.addHTML();
       $('#ajax_invention_data').append(html)
     });
