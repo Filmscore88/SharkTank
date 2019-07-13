@@ -10,7 +10,7 @@ class Invention {
     this.id = obj.id;
     this.name= obj.name;
     this.description= obj.description;
-
+    //this.invention_investments= obj.invention_investments
     this.user_name= obj.user.name
   }
 }
@@ -34,11 +34,20 @@ Invention.prototype.showHTML= function(){
     <h3>Description: ${this.description}</h3>`
   )
 }
+
+// method for Invention ojbects invention_investments amount sum
+//Array.prototype.sum = function (prop) {
+  //  var total = 0
+  //  for ( var i = 0, _len = this.length; i < _len; i++ ) {
+    //    total += this[i][prop]
+  //  }
+  //  return total
+//}
 // Listener functions to be run on document ready
 function activateListeners(){
   $('#html_format').html('')
   moreInventionData();
-
+  invSubmit();
 }
 
 // Listeners
@@ -54,6 +63,7 @@ $('#more_invention_data').on('click', function(e) {
     e.preventDefault();
     $('#ajax_invention_data').html('')
     let id= $(this).attr('data-id')
+    //history.pushState(null, null, /${id});
     fetch(`inventions/${id}.json`)
     .then(res => res.json())
     .then(invention => {
@@ -64,7 +74,12 @@ $('#more_invention_data').on('click', function(e) {
   })
 }
 
-
+  function invSubmit(){
+    $("#new_inv").on("click", function(e){
+      e.preventDefault();
+      console.log("whalla!!!")
+    })
+  }
 
 // ajax request funcitons
 function getInventions(){
@@ -75,7 +90,6 @@ function getInventions(){
 
   }).done(function (data){
     data.forEach(function(obj){
-
       var invention= new Invention(obj);
       var html= invention.addHTML();
       $('#ajax_invention_data').append(html)
