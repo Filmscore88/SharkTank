@@ -19,22 +19,23 @@ Invention.prototype.addHTML= function(){
   let userId = $('ol')[0].id;
   return(
     `<ul>
-      <li>Invention Name:<a href= inventions/${this.id}"> ${this.name}</a> </li>
-      <li>Description: ${this.description}</li>
+      <li>Invention Name:<a href= inventions/${this.id} data-id= ${this.id} class= "show_link"> ${this.name}</a> </li>
     </ul>`
   )
 }
 
 //Method for prototype to add relation data objects as HTML
-Invention.prototype.inventionsHTML= function(){
-
-
+Invention.prototype.showHTML= function(){
+  return(
+  ` <h2>Name:${this.name}
+    <h3>Description: ${this.description}</h3>`
+  )
 }
 // Listener functions to be run on document ready
 function activateListeners(){
   $('#html_format').html('')
-  showInvestments();
   moreInventionData();
+
 }
 
 // Listeners
@@ -45,15 +46,22 @@ $('#more_invention_data').on('click', function(e) {
    e.preventDefault();
    getInventions();
  });
-}
 
-function showInvestments(){
-  $('#get_investments_data').on('click', function(e){
+  $(document).on('click', ".show_link", function(e){
     e.preventDefault();
-    getInvestments();
+    $('#html_format').html('')
+    let id= $(this).attr('data-id')
+    fetch(`inventions/${id}.json`)
+    .then(res => res.json())
+    .then(invention => {
+      let newInvention= new Invention(invention)
+      let inventionHTML= newInvention.showHTML()
+      $('#html_format').append(inventionHTML)
+    })
   })
-
 }
+
+
 
 // ajax request funcitons
 function getInventions(){
@@ -70,13 +78,4 @@ function getInventions(){
       $('#ajax_invention_data').append(html)
     });
   });
-}
-
-
-
-function getInvestments(){
-  $.get(`/users/${id}/inventions/${id}.json`, function(json) {
-
-
-});
 }
