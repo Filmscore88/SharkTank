@@ -1,34 +1,32 @@
-<h2> Welcome <%= @user.name %></h2>
-<ol id=<%= current_user.id %> class="user-inventions-box">
-
-</ol>
-
-<% if current_user.inventor%>
-<div id= "button">
-<button id="more_invention_data">see Inventions</button>
+<h2> Welcome <%= current_user.name %></h2>
+<div id= <%= current_user.id %> class="current-userID">
 </div>
-<div id= "ajax_invention_data"></div>
-
+<div id= "ajax_invention_data">
+  <div id= "title-placement"></div>
+</div>
+<div id= "title-placement"></div>
 <div id= "html_format">
-<ul>
-  <% @user.inventions.each do |inv|%>
-    <li><%= link_to inv.name, user_invention_path(inv.user, inv)%></li>
-  <%end%>
-</ul>
-<br/>
+<% if current_user.inventor%>
+  <h3>status: inventor</h3>
+    <ul>
+      <% @user.inventions.each do |inv|%>
+        <li><%= link_to inv.name, user_invention_path(inv.user, inv)%></li>
+      <%end%>
+    </ul>
+    <br/>
+    <%= link_to 'New invention', new_user_invention_path(@user)%>
+<% else%>
+  <h3>status: investor</h3>
+    <ul>
+      <% @user.invention_investments.each do |inv|%>
+        <li>Invention: <%=inv.invention.name%></li>
+        <li>Invested:$ <%= link_to inv.amount, user_invention_investment_path(inv.user, inv)%></li> <br/>
+      <%end%>
+    </ul>
+    <br/>
+    <%= link_to 'New Investment', new_user_invention_investment_path(@user)%>
+<%end%>
+<div id= "button">
+<button id= "get-inventions">Inventions</button>
 </div>
-<%= link_to 'New invention', new_user_invention_path(@user)%>
-<%end%>
-
-<% if current_user.investor%>
-<h3>Investments:</h3>
-
-<ul>
-  <% @user.invention_investments.each do |inv|%>
-    <li>Invention: <%=inv.invention.name%></li>
-    <li>Invested:$ <%= link_to inv.amount, user_invention_investment_path(inv.user, inv)%></li> <br/>
-  <%end%>
-</ul>
-<br/>
-<%= link_to 'New Investment', new_user_invention_investment_path(@user)%>
-<%end%>
+</div>

@@ -18,7 +18,6 @@ class Invention {
 
 // Method for model object prototype to append HTML to DOM
 Invention.prototype.addHTML= function(){
-  let userId = $('ol')[0].id;
   return(
     `<ul>
       <li>Invention Name:<a href= inventions/${this.id} data-id= ${this.id} class= "show_link"> ${this.name}</a> </li>
@@ -32,7 +31,7 @@ Invention.prototype.showHTML= function(){
   ` <h2>Name:${this.name}</h2>
     <h3>Inventor: ${this.user_name}</h3>
     <h3>Description: ${this.description}</h3>
-    <h3>Investments total: ${this.invention_investments.sum("amount")}<h3>`
+    <h3>Investments total: $${this.invention_investments.sum("amount")}<h3>`
 
   )
 }
@@ -47,15 +46,14 @@ Array.prototype.sum = function (prop) {
 }
 // Listener functions to be run on document ready
 function activateListeners(){
-  $('#html_format').html('')
   moreInventionData();
   invSubmit();
 }
 
 // Listeners
 function moreInventionData(){
-$('#more_invention_data').on('click', function(e) {
-  $('#button').html('')
+$('#get-inventions').on('click', function(e) {
+  $('#html_format').html('')
    history.replaceState(null, null, "/inventions");
    e.preventDefault();
    getInventions();
@@ -104,5 +102,6 @@ function getInventions(){
       var html= invention.addHTML();
       $('#ajax_invention_data').append(html)
     });
+      $('#title-placement').append("<h1> Inventions</h1>")
   });
 }
