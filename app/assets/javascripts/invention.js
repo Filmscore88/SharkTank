@@ -10,7 +10,7 @@ class Invention {
     this.id = obj.id;
     this.name= obj.name;
     this.description= obj.description;
-    //this.invention_investments= obj.invention_investments
+    this.invention_investments= obj.invention_investments;
     this.user_name= obj.user.name
   }
 }
@@ -31,18 +31,20 @@ Invention.prototype.showHTML= function(){
   return(
   ` <h2>Name:${this.name}</h2>
     <h3>Inventor: ${this.user_name}</h3>
-    <h3>Description: ${this.description}</h3>`
+    <h3>Description: ${this.description}</h3>
+    <h3>Investments total: ${this.invention_investments.sum("amount")}<h3>`
+
   )
 }
 
 // method for Invention ojbects invention_investments amount sum
-//Array.prototype.sum = function (prop) {
-  //  var total = 0
-  //  for ( var i = 0, _len = this.length; i < _len; i++ ) {
-    //    total += this[i][prop]
-  //  }
-  //  return total
-//}
+Array.prototype.sum = function (prop) {
+   var total = 0
+    for ( var i = 0, _len = this.length; i < _len; i++ ) {
+      total += this[i][prop]
+    }
+ return total
+}
 // Listener functions to be run on document ready
 function activateListeners(){
   $('#html_format').html('')
