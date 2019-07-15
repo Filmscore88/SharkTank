@@ -1,22 +1,23 @@
 <h2> Welcome <%= current_user.name %></h2>
-<div id= <%= current_user.id %> class="current-userID">
-</div>
-<div id= "ajax_invention_data">
-  <div id= "title-placement"></div>
-</div>
-<div id= "title-placement"></div>
+
+  <ul id= "invention_inserts">
+    <div id= "title-placement"></div>
+  </ul>
+
 <div id= "html_format">
 <% if current_user.inventor%>
   <h3>status: inventor</h3>
+  <h3>My Inventions:</h3>
     <ul>
       <% @user.inventions.each do |inv|%>
         <li><%= link_to inv.name, user_invention_path(inv.user, inv)%></li>
       <%end%>
     </ul>
     <br/>
-    <%= link_to 'New invention', new_user_invention_path(@user)%>
 <% else%>
   <h3>status: investor</h3>
+  <h3>My Invesments:</h3>
+
     <ul>
       <% @user.invention_investments.each do |inv|%>
         <li>Invention: <%=inv.invention.name%></li>
@@ -30,3 +31,4 @@
 <button id= "get-inventions">Inventions</button>
 </div>
 </div>
+<%= link_to 'new invention', new_user_invention_path(@user)%>

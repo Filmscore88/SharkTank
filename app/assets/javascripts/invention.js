@@ -19,9 +19,7 @@ class Invention {
 // Method for model object prototype to append HTML to DOM
 Invention.prototype.addHTML= function(){
   return(
-    `<ul>
-      <li>Invention Name:<a href= inventions/${this.id} data-id= ${this.id} class= "show_link"> ${this.name}</a> </li>
-    </ul>`
+    `<li> <strong> <a href= inventions/${this.id} data-id= ${this.id} class= "show_link"> ${this.name} </a> </strong> </li>`
   )
 }
 
@@ -31,7 +29,7 @@ Invention.prototype.showHTML= function(){
   ` <h2>Name:${this.name}</h2>
     <h3>Inventor: ${this.user_name}</h3>
     <h3>Description: ${this.description}</h3>
-    <h3>Investments total: $${this.invention_investments.sum("amount")}<h3>`
+    <h3>Invention Investments total: $${this.invention_investments.sum("amount")}<h3>`
 
   )
 }
@@ -44,14 +42,16 @@ Array.prototype.sum = function (prop) {
     }
  return total
 }
+
+
 // Listener functions to be run on document ready
 function activateListeners(){
-  moreInventionData();
+  activateInventions();
   invSubmit();
 }
 
 // Listeners
-function moreInventionData(){
+function activateInventions(){
 $('#get-inventions').on('click', function(e) {
   $('#html_format').html('')
    history.replaceState(null, null, "/inventions");
@@ -61,18 +61,19 @@ $('#get-inventions').on('click', function(e) {
 
   $(document).on('click', ".show_link", function(e){
     e.preventDefault();
-    $('#ajax_invention_data').html('')
+    $('#invention_inserts').html('')
     let id= $(this).attr('data-id')
-    //history.pushState(null, null, /${id});
+
     fetch(`inventions/${id}.json`)
     .then(res => res.json())
     .then(invention => {
       let newInvention= new Invention(invention)
       let inventionHTML= newInvention.showHTML()
-      $('#ajax_invention_data').append(inventionHTML)
+      $('#invention_inserts').append(inventionHTML)
     })
   })
 }
+
 
   function invSubmit(){
     $("#newInv").on("submit", function(e){
@@ -100,7 +101,7 @@ function getInventions(){
     data.forEach(function(obj){
       var invention= new Invention(obj);
       var html= invention.addHTML();
-      $('#ajax_invention_data').append(html)
+      $('#invention_inserts').append(html)
     });
       $('#title-placement').append("<h1> Inventions</h1>")
   });
