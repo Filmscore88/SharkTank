@@ -9,7 +9,10 @@ If you have seen the show Shark tank, you know it has been a great platform for 
 
 
 ```bash
-run bundle install
+in your terminal run the following in order:
+ bundle install
+ rake db:migrate
+ 
 ```
 
 ## Usage
@@ -19,8 +22,7 @@ run rails s in your terminal
 
 copy and paste the localhost address to your browser, example(https://localhost:3000)
 
-signup as either a  inventor, or investor.
-
+select to be an investor or inventor
 start creating inventions if you are an inventor, or start making investments if you are an investor.
 
 ```

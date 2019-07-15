@@ -24,8 +24,6 @@ class InventionsController < ApplicationController
     @invention= @user.inventions.build(invention_params)
       if @invention.save
         render json: @invention
-
-
       else
         flash[:notice]= 'ERROR: Invalid Entry'
         render :new
