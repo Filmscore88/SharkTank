@@ -3,7 +3,7 @@
 <div id= "html_format">
   <ul>
     <% @inventions.each do |i|%>
-      <strong> <li>Invention Name: <%= link_to i.name, user_invention_path(i.user, i)%> </li> </strong>
+      <strong> <li><%= link_to i.name, user_invention_path(i.user, i)%> </li> </strong>
     <%end%>
   </ul><br/>
 </div>
