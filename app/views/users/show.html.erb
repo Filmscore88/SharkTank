@@ -5,30 +5,32 @@
   </ul>
 
 <div id= "html_format">
-<% if current_user.inventor%>
-  <h3>status: inventor</h3>
-  <h3>My Inventions:</h3>
-    <ul>
-      <% @user.inventions.each do |inv|%>
-        <li><%= link_to inv.name, user_invention_path(inv.user, inv)%></li>
-      <%end%>
-    </ul>
-    <br/>
-<% else%>
-  <h3>status: investor</h3>
-  <h3>My Invesments:</h3>
 
-    <ul>
-      <% @user.invention_investments.each do |inv|%>
-        <li>Invention: <%=inv.invention.name%></li>
-        <li>Invested:$ <%= link_to inv.amount, user_invention_investment_path(inv.user, inv)%></li> <br/>
-      <%end%>
-    </ul>
-    <br/>
-    <%= link_to 'New Investment', new_user_invention_investment_path(@user)%>
-<%end%>
-<div id= "button">
-<button id= "get-inventions">Inventions</button>
-</div>
+  <% if current_user.inventor%>
+    <h3>status: inventor</h3>
+    <h3>My Inventions:</h3>
+      <ul>
+        <% @user.inventions.each do |inv|%>
+          <li><%= link_to inv.name, user_invention_path(inv.user, inv)%></li>
+        <%end%>
+      </ul><br/>
+  <% else%>
+    <h3>status: investor</h3>
+    <h3>My Invesments:</h3>
+
+      <ul>
+        <% @user.invention_investments.each do |inv|%>
+          <li>Invention: <%=inv.invention.name%></li>
+          <li>Invested:$ <%= link_to inv.amount, user_invention_investment_path(inv.user, inv)%></li> <br/>
+        <%end%>
+      </ul><br/>
+      <%= link_to 'New Investment', new_user_invention_investment_path(@user)%>
+  <%end%>
+
+
+  <div id= "button">
+    <button id= "get-inventions">Inventions</button>
+  </div>
+  
 </div>
 <%= link_to 'new invention', new_user_invention_path(@user)%>

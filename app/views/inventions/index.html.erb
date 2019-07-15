@@ -1,10 +1,9 @@
 <h1> Inventions</h1>
-<div id= "html_format">
-<% @inventions.each do |i|%>
-<ul>
-  <li>Invention Name: <%= link_to i.name, user_invention_path(i.user, i)%>
-  <li>Inventor: <%=i.user.name%>
-</ul><br/>
 
-<%end%>
+<div id= "html_format">
+  <ul>
+    <% @inventions.each do |i|%>
+      <strong> <li>Invention Name: <%= link_to i.name, user_invention_path(i.user, i)%> </li> </strong>
+    <%end%>
+  </ul><br/>
 </div>
