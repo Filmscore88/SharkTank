@@ -18,6 +18,9 @@ class Invention {
 
 
 // Method for model object prototype to append HTML to DOM
+
+
+
 Invention.prototype.addHTML= function(){
   return(
     `<li> <strong> <a href= inventions/${this.id} data-id= ${this.id} class= "show_link"> ${this.name} </a> </strong> </li>`
@@ -42,7 +45,6 @@ Array.prototype.sum = function (prop) {
     }
  return total
 }
-
 
 
 // Listeners
@@ -80,9 +82,24 @@ function getInventions(){
     dataType: "json"
 
   }).done(function (data){
+    data = data.sort(function(a, b) {
+      var nameA = a.name.toUpperCase();
+      var nameB = b.name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+
+      return data;
+    });
     data.forEach(function(obj){
       var invention= new Invention(obj);
+
       var html= invention.addHTML();
+
       $('#invention_inserts').append(html)
     });
       $('#title-placement').append("<h1> Inventions</h1>")
@@ -91,7 +108,7 @@ function getInventions(){
 
 
 function getInvention(id){
-  fetch(`inventions/${id}.json`)
+  fetch(`inventions/${id}`)
   .then(res => res.json())
   .then(invention => {
     let newInvention= new Invention(invention)
