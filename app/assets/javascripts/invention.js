@@ -30,15 +30,15 @@ Invention.prototype.showHTML= function(){
   ` <h2>Name:${this.name}</h2>
     <h3>Inventor: ${this.user_name}</h3>
     <h3>Description: ${this.description}</h3>
-    <h3>Invention Investments total: $${this.invention_investments.sum("amount")}<h3>`
+    <h3>Invention Investments: $${this.invention_investments.sum("amount")}<h3>`
   )
 }
 
 // method for Invention ojbects invention_investments amount sum
 Array.prototype.sum = function (prop) {
-   var total = 0
+   var total = []
     for ( var i = 0, _len = this.length; i < _len; i++ ) {
-      total += this[i][prop]
+      total.push( this[i][prop] );
     }
  return total
 }
